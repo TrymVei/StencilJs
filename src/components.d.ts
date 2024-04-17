@@ -20,6 +20,8 @@ export namespace Components {
          */
         "middle": string;
     }
+    interface TabComponent {
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -28,8 +30,15 @@ declare global {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
     };
+    interface HTMLTabComponentElement extends Components.TabComponent, HTMLStencilElement {
+    }
+    var HTMLTabComponentElement: {
+        prototype: HTMLTabComponentElement;
+        new (): HTMLTabComponentElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
+        "tab-component": HTMLTabComponentElement;
     }
 }
 declare namespace LocalJSX {
@@ -47,8 +56,11 @@ declare namespace LocalJSX {
          */
         "middle"?: string;
     }
+    interface TabComponent {
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
+        "tab-component": TabComponent;
     }
 }
 export { LocalJSX as JSX };
@@ -56,6 +68,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "tab-component": LocalJSX.TabComponent & JSXBase.HTMLAttributes<HTMLTabComponentElement>;
         }
     }
 }
