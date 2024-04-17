@@ -10,7 +10,7 @@ export class TabComponent {
 
   @State() tabsId: string[] = [];
 
-  componentDidRender() {
+  componentWillLoad() {
     Array.from(this.host.children).map(child => {
       if (child instanceof HTMLElement && child.id) {
         this.tabsId.push(child.id);
@@ -21,6 +21,11 @@ export class TabComponent {
   render() {
     return (
       <div>
+        <div class="tabs">
+          {this.tabsId.map(tabId => {
+            return <a href={`#${tabId}`}>{tabId}</a>;
+          })}
+        </div>
         {Array.from(this.host.children).map(child => (
           <div innerHTML={child.outerHTML} />
         ))}
