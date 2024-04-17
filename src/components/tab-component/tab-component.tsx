@@ -1,4 +1,4 @@
-import { Component, h, Element } from '@stencil/core';
+import { Component, h, Element, State } from '@stencil/core';
 
 @Component({
   tag: 'tab-component',
@@ -7,6 +7,16 @@ import { Component, h, Element } from '@stencil/core';
 })
 export class TabComponent {
   @Element() host: HTMLDivElement;
+
+  @State() tabsId: string[] = [];
+
+  componentDidRender() {
+    Array.from(this.host.children).map(child => {
+      if (child instanceof HTMLElement && child.id) {
+        this.tabsId.push(child.id);
+      }
+    });
+  }
 
   render() {
     return (
