@@ -10,6 +10,7 @@ export class TabComponent {
   @Element() host: HTMLDivElement;
 
   @State() tabs: Tab[] = [];
+  @State() activeTab: number = 0;
 
   /*
    * Get the innerHTML of the first child of a tab
@@ -34,6 +35,11 @@ export class TabComponent {
     };
   }
 
+  private setActiveTab(index: number) {
+    this.activeTab = index;
+    console.log(index);
+  }
+
   componentWillLoad() {
     Array.from(this.host.children).map(child => {
       if (child instanceof HTMLElement && child.id) {
@@ -49,12 +55,16 @@ export class TabComponent {
     return (
       <div>
         <div class="tabs">
-          {this.tabs.map((tab: Tab) => {
-            return <a href={`#${tab.id}`}>{tab.name}</a>;
+          {this.tabs.map((tab: Tab, index: number) => {
+            return (
+              <a href={`#${tab.id}`} onClick={() => this.setActiveTab(index)}>
+                {tab.name}
+              </a>
+            );
           })}
         </div>
-        {Array.from(this.host.children).map(child => (
-          <div innerHTML={child.outerHTML} />
+        {Array.from(this.host.children).map((child: HTMLElement, index: number) => (
+          <div style={{ display: this.activeTab == index ? 'block' : 'none' }} innerHTML={child.outerHTML} />
         ))}
       </div>
     );
