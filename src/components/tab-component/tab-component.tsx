@@ -40,6 +40,17 @@ export class TabComponent {
     console.log(index);
   }
 
+  private handleTabClick(e: Event, index: number) {
+    e.preventDefault();
+    this.setActiveTab(index);
+  }
+
+  private setTabIndexes(index: number) {
+    if (index > 0) {
+      return '-1';
+    }
+  }
+
   componentWillLoad() {
     Array.from(this.host.children).map(child => {
       if (child instanceof HTMLElement && child.id) {
@@ -55,16 +66,20 @@ export class TabComponent {
     return (
       <div>
         <div class="tabs">
-          {this.tabs.map((tab: Tab, index: number) => {
-            return (
-              <a href={`#${tab.id}`} onClick={() => this.setActiveTab(index)}>
-                {tab.name}
-              </a>
-            );
-          })}
+          <ul role="tablist">
+            {this.tabs.map((tab: Tab, index: number) => {
+              return (
+                <li role="presentation">
+                  <a role="tab" tabindex={this.setTabIndexes(index)} aria-controls={tab.id} href={`#${tab.id}`} onClick={e => this.handleTabClick(e, index)}>
+                    {tab.name}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
         </div>
         {Array.from(this.host.children).map((child: HTMLElement, index: number) => (
-          <div style={{ display: this.activeTab == index ? 'block' : 'none' }} innerHTML={child.outerHTML} />
+          <div role="tabpanel" style={{ display: this.activeTab == index ? 'block' : 'none' }} innerHTML={child.outerHTML} />
         ))}
       </div>
     );
