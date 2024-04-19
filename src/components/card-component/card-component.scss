@@ -5,11 +5,12 @@
 
 .card {
   width: fit-content;
+  max-width: 500px;
   background-color: var(--background-color-yellow);
 }
 
 .card__image {
-  max-width: 300px;
+  width: 100%;
 }
 
 .card__content {
