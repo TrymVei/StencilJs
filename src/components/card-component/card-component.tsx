@@ -31,9 +31,11 @@ export class CardComponent {
 
     return (
       <div class="card">
-        <h3 class="card__title">{this.title}</h3>
         <img class="card__image" src={imageSrc} alt={this.imageAlt} />
-        <p class="card__description">{this.description}</p>
+        <div class="card__content">
+          <h3 class="card__title">{this.title}</h3>
+          <p class="card__description">{this.description}</p>
+        </div>
       </div>
     );
   }

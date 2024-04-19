@@ -1,0 +1,18 @@
+.card {
+  width: fit-content;
+  background-color: var(--background-color-yellow);
+}
+
+.card__image {
+  max-width: 300px;
+}
+
+.card__content {
+  padding: 1rem 0.25rem;
+}
+
+.card__title,
+.card__description {
+  color: var(--color-darkblue);
+  margin-top: 0;
+}
