@@ -2,6 +2,7 @@ import { Config } from '@stencil/core';
 
 export const config: Config = {
   namespace: 'lillestromkomune',
+  globalStyle: 'src/global/app.scss',
   outputTargets: [
     {
       type: 'dist',
@@ -21,6 +22,6 @@ export const config: Config = {
     },
   ],
   testing: {
-    browserHeadless: "new",
+    browserHeadless: 'new',
   },
 };

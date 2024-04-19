@@ -6,6 +6,24 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface CardComponent {
+        /**
+          * Card description
+         */
+        "description": string;
+        /**
+          * Image alt
+         */
+        "imageAlt": string;
+        /**
+          * Image source
+         */
+        "imageSrc": string;
+        /**
+          * Card title
+         */
+        "title": string;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -24,6 +42,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLCardComponentElement extends Components.CardComponent, HTMLStencilElement {
+    }
+    var HTMLCardComponentElement: {
+        prototype: HTMLCardComponentElement;
+        new (): HTMLCardComponentElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -37,11 +61,30 @@ declare global {
         new (): HTMLTabComponentElement;
     };
     interface HTMLElementTagNameMap {
+        "card-component": HTMLCardComponentElement;
         "my-component": HTMLMyComponentElement;
         "tab-component": HTMLTabComponentElement;
     }
 }
 declare namespace LocalJSX {
+    interface CardComponent {
+        /**
+          * Card description
+         */
+        "description"?: string;
+        /**
+          * Image alt
+         */
+        "imageAlt"?: string;
+        /**
+          * Image source
+         */
+        "imageSrc"?: string;
+        /**
+          * Card title
+         */
+        "title"?: string;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -59,6 +102,7 @@ declare namespace LocalJSX {
     interface TabComponent {
     }
     interface IntrinsicElements {
+        "card-component": CardComponent;
         "my-component": MyComponent;
         "tab-component": TabComponent;
     }
@@ -67,6 +111,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "card-component": LocalJSX.CardComponent & JSXBase.HTMLAttributes<HTMLCardComponentElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "tab-component": LocalJSX.TabComponent & JSXBase.HTMLAttributes<HTMLTabComponentElement>;
         }
