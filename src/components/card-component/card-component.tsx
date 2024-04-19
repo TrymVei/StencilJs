@@ -1,4 +1,4 @@
-import { Component, Prop, h, getAssetPath } from '@stencil/core';
+import { Component, Prop, h, getAssetPath, Element } from '@stencil/core';
 
 @Component({
   tag: 'card-component',
@@ -21,11 +21,6 @@ export class CardComponent {
    */
   @Prop() imageAlt: string;
 
-  /**
-   * Card description
-   */
-  @Prop() description: string;
-
   render() {
     const imageSrc = getAssetPath(`../assets/card/${this.imageSrc}.jpg`);
 
@@ -34,7 +29,9 @@ export class CardComponent {
         <img class="card__image" src={imageSrc} alt={this.imageAlt} />
         <div class="card__content">
           <h3 class="card__title">{this.title}</h3>
-          <p class="card__description">{this.description}</p>
+          <p class="card__description">
+            <slot></slot>
+          </p>
         </div>
       </div>
     );
