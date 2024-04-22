@@ -1,4 +1,4 @@
-import { Component, h, Element, State } from '@stencil/core';
+import { Component, h, Element, State, Listen } from '@stencil/core';
 import { Tab } from '../../utils/types/tab';
 
 @Component({
@@ -37,7 +37,6 @@ export class TabComponent {
 
   private setActiveTab(index: number) {
     this.activeTab = index;
-    console.log(index);
   }
 
   private handleTabClick(e: Event, index: number) {
@@ -46,9 +45,7 @@ export class TabComponent {
   }
 
   private setTabIndexes(index: number) {
-    if (index > 0) {
-      return '-1';
-    }
+    return index === this.activeTab ? '0' : '-1';
   }
 
   componentWillLoad() {
@@ -62,6 +59,48 @@ export class TabComponent {
     });
   }
 
+  // Functions for handling arrow key navigation
+  @Listen('keydown')
+  handleGlobalKeydown(event: KeyboardEvent) {
+    if (event.key === 'ArrowLeft') {
+      this.handleArrowKey(this.activeTab, -1); // Move to the previous tab
+    } else if (event.key === 'ArrowRight') {
+      this.handleArrowKey(this.activeTab, 1); // Move to the next tab
+    } else if (event.key === 'Home') {
+      this.setActiveTab(0); // Move to the first tab
+      this.focusOnTab(0);
+    } else if (event.key === 'End') {
+      this.setActiveTab(this.tabs.length - 1); // Move to the last tab
+      this.focusOnTab(this.tabs.length - 1);
+    }
+  }
+
+  private focusOnTab(index: number) {
+    const tab = this.host.shadowRoot.querySelector(`#anchor${index}`) as HTMLElement;
+    if (tab) {
+      tab.focus();
+    }
+  }
+
+  private handleArrowKey(currentIndex: number, direction: number) {
+    const numTabs = this.tabs.length;
+
+    // Calculate the new index
+    let newIndex = currentIndex + direction;
+
+    // Wrap around if the index exceeds the number of tabs
+    if (newIndex < 0) {
+      newIndex = numTabs - 1;
+    } else if (newIndex >= numTabs) {
+      newIndex = 0;
+    }
+
+    // Set the active tab
+    this.setActiveTab(newIndex);
+    // Focus on the new tab
+    this.focusOnTab(newIndex);
+  }
+
   render() {
     return (
       <div>
@@ -70,7 +109,7 @@ export class TabComponent {
             {this.tabs.map((tab: Tab, index: number) => {
               return (
                 <li role="presentation">
-                  <a role="tab" tabindex={this.setTabIndexes(index)} aria-controls={tab.id} href={`#${tab.id}`} onClick={e => this.handleTabClick(e, index)}>
+                  <a role="tab" id={`anchor${index}`} tabindex={this.setTabIndexes(index)} aria-controls={tab.id} href={`#${tab.id}`} onClick={e => this.handleTabClick(e, index)}>
                     {tab.name}
                   </a>
                 </li>
