@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'Garet Book';
+  src: url('../assets/fonts/Garet-Book.ttf') format('truetype');
+}
+
+.card {
+  width: fit-content;
+  max-width: 500px;
+  background-color: var(--background-color-yellow);
+}
+
+.card__image {
+  width: 100%;
+}
+
+.card__content {
+  padding: 1rem 0.25rem;
+}
+
+.card__title,
+.card__description {
+  color: var(--color-darkblue);
+  font-family: 'Garet Book', sans-serif;
+  margin-top: 0;
+}
