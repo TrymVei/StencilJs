@@ -57,6 +57,10 @@ export class TabComponent {
         this.tabs.push(tabObject);
       }
     });
+    const tabPanel = this.host.shadowRoot.querySelector(`#page${1}`) as HTMLElement;
+    if (tabPanel) {
+      tabPanel.focus();
+    }
   }
 
   // Functions for handling arrow key navigation
@@ -66,12 +70,21 @@ export class TabComponent {
       this.handleArrowKey(this.activeTab, -1); // Move to the previous tab
     } else if (event.key === 'ArrowRight') {
       this.handleArrowKey(this.activeTab, 1); // Move to the next tab
-    } else if (event.key === 'Home') {
+    } else if (event.key === 'H') {
       this.setActiveTab(0); // Move to the first tab
       this.focusOnTab(0);
-    } else if (event.key === 'End') {
+    } else if (event.key === 'E') {
       this.setActiveTab(this.tabs.length - 1); // Move to the last tab
       this.focusOnTab(this.tabs.length - 1);
+    } else if (event.key === 'Space' || event.key === ' ') {
+      this.focusOnTabPanel(this.activeTab);
+    }
+  }
+
+  private focusOnTabPanel(index: number) {
+    const tabPanel = this.host.shadowRoot.querySelector(`#tabpanel${index}`) as HTMLElement; // index + 1 because the tab index is 0-based
+    if (tabPanel) {
+      tabPanel.focus();
     }
   }
 
@@ -118,7 +131,7 @@ export class TabComponent {
           </ul>
         </div>
         {Array.from(this.host.children).map((child: HTMLElement, index: number) => (
-          <div role="tabpanel" style={{ display: this.activeTab == index ? 'block' : 'none' }} innerHTML={child.outerHTML} />
+          <div tabindex="0" id={`tabpanel${index}`} role="tabpanel" style={{ display: this.activeTab == index ? 'block' : 'none' }} innerHTML={child.outerHTML} />
         ))}
       </div>
     );
