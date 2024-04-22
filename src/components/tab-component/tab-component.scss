@@ -1,0 +1,37 @@
+.tabs__list {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.tabs__list_item {
+  list-style: none;
+}
+
+.tabs__link {
+  text-decoration: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  padding-bottom: 0;
+  margin-bottom: 1rem;
+  border-radius: 0 25% 0 0;
+  border: 1px solid #3c78b4;
+}
+
+.tabs__link[tabindex='-1'] {
+  background-color: #233264;
+}
+
+.tabs__link[tabindex='0'] {
+  background-color: #3c78b4;
+}
+
+.tabpanel {
+  background-color: #3c78b4;
+  padding: 1rem 0.5rem;
+  border: 2px solid #233264;
+}
+
+.tabpanel * {
+  color: white;
+}
