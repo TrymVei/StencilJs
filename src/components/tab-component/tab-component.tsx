@@ -118,11 +118,19 @@ export class TabComponent {
     return (
       <div>
         <div class="tabs">
-          <ul role="tablist">
+          <ul class="tabs__list" role="tablist">
             {this.tabs.map((tab: Tab, index: number) => {
               return (
-                <li role="presentation">
-                  <a role="tab" id={`anchor${index}`} tabindex={this.setTabIndexes(index)} aria-controls={tab.id} href={`#${tab.id}`} onClick={e => this.handleTabClick(e, index)}>
+                <li class="tabs__list_item" role="presentation">
+                  <a
+                    class="tabs__link"
+                    role="tab"
+                    id={`anchor${index}`}
+                    tabindex={this.setTabIndexes(index)}
+                    aria-controls={tab.id}
+                    href={`#${tab.id}`}
+                    onClick={e => this.handleTabClick(e, index)}
+                  >
                     {tab.name}
                   </a>
                 </li>
@@ -131,7 +139,7 @@ export class TabComponent {
           </ul>
         </div>
         {Array.from(this.host.children).map((child: HTMLElement, index: number) => (
-          <div tabindex="0" id={`tabpanel${index}`} role="tabpanel" style={{ display: this.activeTab == index ? 'block' : 'none' }} innerHTML={child.outerHTML} />
+          <div class="tabpanel" tabindex="0" id={`tabpanel${index}`} role="tabpanel" style={{ display: this.activeTab == index ? 'block' : 'none' }} innerHTML={child.outerHTML} />
         ))}
       </div>
     );
