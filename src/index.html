@@ -10,13 +10,19 @@
 
   <script type="module" src="/build/lillestromkomune.esm.js"></script>
   <script nomodule src="/build/lillestromkomune.js"></script>
+  <style>
+    @font-face {
+      font-family: 'Garet Book';
+      src: url('../assets/fonts/Garet-Book.ttf') format('truetype');
+    }
+  </style>
 </head>
 
 <body>
   <tab-component>
     <div id="page1">
       <h2>Om oss</h2>
-      <p>
+      <p class="half_width">
         Lillestrøm er en kommune på Nedre Romerike i Akershus fylke. Kommunen ble dannet 1. januar 2020 ved sammenslåing
         av Fet, Skedsmo og Sørum kommuner, men har også tidligere
         vært egen kommune. Navnet Lillestrøm på den nye storkommunen ble bestemt av Kommunal- og
@@ -96,10 +102,30 @@
     </div>
 
     <div id="page3">
-      <h2>Page 3</h2>
-      <p>Some content</p>
+      <h2>Notater gjort underveis</h2>
+      <ul class="half_width">
+        <li>Brukt anchor tag i tilfelle js ikke laster feks. Så har man muligheten til å linke til område</li>
+        <li>ul som role tablist for web acessebility. Kan legge inn role tab på elementene for å få skjermlesere til å
+          si det er tabs og hvilken tab av hvor mange man er på</li>
+        <li>Satt tabindex til -1 slik at man ikke kan tabbe seg gjennom. Hentet fra tab eksempel på w3c</li>
+        <li>li til presentation fordi vi ikke ønsker å ha li html semantikken med</li>
+        <li>
+          Kortet kan lages på samme måte som tab, men gikk ut ifra at det alltid skal være tittel, bilde og en
+          beskrivelse. Kan også lages om til en link eller ha en LinkCard
+        </li>
+        <li>
+          Har ikke lagt vekt på å legge inn bakgrunsfarge etc som props. Kan gjøre at komponentene blir mer
+          customizable. Feks ha et interface/type med verdiene som kan brukes
+        </li>
+        <li>Tatt utganspunkt i at komponentene skal brukes på webapplikasjoner som har et layout og global styling for
+          headings, paragrafer...</li>
+        <li>Har ikke brukt tid på å skissere opp komponentene på forhånd. Det synes godt.</li>
+        <li>Har ikke lagt vekt på tester eller dokumentasjon på komponentene</li>
+      </ul>
+      <img width="200px" height="auto" src="assets/tab3/bukke.png" alt="bukke" />
+      <p>Takk for oppmerksomheten!</p>
     </div>
   </tab-component>
 </body>
 
-</html>
+</htmlj
