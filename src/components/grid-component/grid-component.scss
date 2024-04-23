@@ -5,3 +5,9 @@
   gap: 2rem 4rem;
   justify-items: center;
 }
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
